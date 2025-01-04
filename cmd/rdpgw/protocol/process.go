@@ -131,7 +131,16 @@ func (p *Processor) Process(ctx context.Context) error {
 					return fmt.Errorf("%x: denied by security policy", E_PROXY_RAP_ACCESSDENIED)
 				}
 			}
-			log.Printf("Establishing connection to RDP server: %s", host)
+			// p.tunnel.User.GetAttribute(identity.AttrClientIp) (client ip connecting)
+			// host (host ip connecting to)
+			// p.tunnel.User.UserName() (username)
+			clientIP := p.tunnel.User.GetAttribute(identity.AttrClientIp) // Extract client IP
+			username := p.tunnel.User.UserName()                         // Extract username
+
+			log.Printf(
+				"Establishing RDP Connection Details / ClientIP: %s / HostIP: %s / Username: %s",
+				clientIP, host, username,
+			)
 			p.tunnel.rwc, err = net.DialTimeout("tcp", host, time.Second*15)
 			if err != nil {
 				log.Printf("Error connecting to %s, %s", host, err)
