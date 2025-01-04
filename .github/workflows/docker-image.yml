@@ -30,7 +30,7 @@ jobs:
           file: ./dev/docker/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ github.repository_owner }}/rdpgw:latest
+          tags: ${{ secrets.DOCKER_USER }}/rdpgw:latest
       - name: Build and push - latest
         uses: docker/build-push-action@v3
         with:
@@ -38,11 +38,11 @@ jobs:
           file: ./dev/docker/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ github.repository_owner }}/rdpgw:${{ github.ref_name }}
+          tags: ${{ secrets.DOCKER_USER }}/rdpgw:${{ github.ref_name }}
       - name: Update Docker Hub Description
         uses: peter-evans/dockerhub-description@v3
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: ${{ github.repository_owner }}/rdpgw
+          repository: ${{ secrets.DOCKER_USER }}/rdpgw
           readme-filepath: ./dev/docker/docker-readme.md
