@@ -136,7 +136,7 @@ func (p *Processor) Process(ctx context.Context) error {
 			// p.tunnel.User.UserName() (username)
 			clientIP := p.tunnel.User.GetAttribute(identity.AttrClientIp) // Extract client IP
 			sessionID := p.tunnel.User.SessionId()
-			username := p.tunnel.User.UserName()                         // Extract username
+			username := p.tunnel.User.Email()                         // Extract username
 
 			log.Printf(
 				"Establishing RDP Connection Details / ID: %s / ClientIP: %s / HostIP: %s / Username: %s",
