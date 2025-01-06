@@ -53,7 +53,6 @@ func TestPAACookie(t *testing.T) {
 	username := "test_paa_cookie"
 	attr_client_ip := "127.0.0.1"
 	attr_access_token := "aabbcc"
-	sessionID := "1234"
 
 	id := identity.NewUser()
 	id.SetUserName(username)
