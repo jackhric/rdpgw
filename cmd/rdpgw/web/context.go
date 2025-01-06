@@ -41,14 +41,12 @@ func EnrichContext(next http.Handler) http.Handler {
 			}
 			id.SetAttribute(identity.AttrClientIp, clientIp)
 			id.SetAttribute(identity.AttrProxies, proxies)
-			id.SetAttribute(identity.SessionId, id.SessionId())
 		}
 
 		id.SetAttribute(identity.AttrRemoteAddr, r.RemoteAddr)
 		if h == "" {
 			clientIp, _, _ := net.SplitHostPort(r.RemoteAddr)
 			id.SetAttribute(identity.AttrClientIp, clientIp)
-			id.SetAttribute(identity.SessionId, id.SessionId())
 		}
 		next.ServeHTTP(w, identity.AddToRequestCtx(id, r))
 	})

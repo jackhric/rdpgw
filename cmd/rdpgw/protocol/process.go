@@ -135,7 +135,7 @@ func (p *Processor) Process(ctx context.Context) error {
 			// host (host ip connecting to)
 			// p.tunnel.User.UserName() (username)
 			clientIP := p.tunnel.User.GetAttribute(identity.AttrClientIp) // Extract client IP
-			sessionID := p.tunnel.User.GetAttribute(identity.SessionId)
+			sessionID := p.tunnel.User.SessionId()
 			username := p.tunnel.User.UserName()                         // Extract username
 
 			log.Printf(

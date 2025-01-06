@@ -58,7 +58,6 @@ func TestPAACookie(t *testing.T) {
 	id := identity.NewUser()
 	id.SetUserName(username)
 	id.SetAttribute(identity.AttrClientIp, attr_client_ip)
-	id.SetAttribute(identity.SessionId, sessionID)
 	id.SetAttribute(identity.AttrAccessToken, attr_access_token)
 
 	ctx := context.Background()
