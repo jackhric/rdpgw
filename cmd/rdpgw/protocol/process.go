@@ -135,11 +135,12 @@ func (p *Processor) Process(ctx context.Context) error {
 			// host (host ip connecting to)
 			// p.tunnel.User.UserName() (username)
 			clientIP := p.tunnel.User.GetAttribute(identity.AttrClientIp) // Extract client IP
+			sessionID := p.tunnel.User.GetAttribute(identity.SessionId)
 			username := p.tunnel.User.UserName()                         // Extract username
 
 			log.Printf(
-				"Establishing RDP Connection Details / ClientIP: %s / HostIP: %s / Username: %s",
-				clientIP, host, username,
+				"Establishing RDP Connection Details / ID: %s / ClientIP: %s / HostIP: %s / Username: %s",
+				sessionID, clientIP, host, username,
 			)
 			p.tunnel.rwc, err = net.DialTimeout("tcp", host, time.Second*15)
 			if err != nil {
